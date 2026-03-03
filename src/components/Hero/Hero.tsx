@@ -128,39 +128,14 @@ export default function Hero() {
                     </a>
                 </motion.div>
 
-                {/* Social Links */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1 }}
-                    className="mt-12 flex justify-center gap-6"
-                >
-                    <a
-                        href="https://github.com/thanhthuong03"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-pixel text-xs text-white hover:text-arcade-cyan transition-colors"
-                    >
-                        [GITHUB]
-                    </a>
-                    <a
-                        href="https://linkedin.com/in/thanh-thuong"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-pixel text-xs text-white hover:text-arcade-cyan transition-colors"
-                    >
-                        [LINKEDIN]
-                    </a>
-                </motion.div>
-
                 {/* Scroll Indicator */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, y: [0, 10, 0] }}
                     transition={{ duration: 2, delay: 1.5, repeat: Infinity }}
-                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                    className="mt-12 flex justify-center"
                 >
-                    <div className="font-pixel text-xs text-arcade-cyan/50">
+                    <div className="font-pixel text-sm text-arcade-cyan/70">
                         ▼ SCROLL ▼
                     </div>
                 </motion.div>

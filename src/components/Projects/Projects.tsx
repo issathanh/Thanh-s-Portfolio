@@ -1,9 +1,77 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { projects } from "@/data/projects";
+import Image from "next/image";
+
+function ProjectImageCarousel({ images, title }: { images?: string[]; title: string }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (!images || images.length <= 1) return;
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [images]);
+
+    if (!images || images.length === 0) {
+        return (
+            <div className="relative h-64 bg-gradient-to-br from-arcade-purple to-arcade-dark flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,255,255,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
+                <div className="relative z-10 text-center">
+                    <div className="font-pixel text-xs text-arcade-cyan/50 mb-2">
+                        [SCREENSHOT]
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="relative h-80 bg-arcade-dark overflow-hidden">
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={currentIndex}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                >
+                    <Image
+                        src={images[currentIndex]}
+                        alt={`${title} screenshot ${currentIndex + 1}`}
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                </motion.div>
+            </AnimatePresence>
+
+            {/* Image Indicators */}
+            {images.length > 1 && (
+                <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2 z-10">
+                    {images.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setCurrentIndex(idx)}
+                            className={`w-2 h-2 border ${idx === currentIndex
+                                ? "bg-arcade-cyan border-arcade-cyan"
+                                : "bg-transparent border-arcade-cyan/50 hover:border-arcade-cyan"
+                                } transition-all`}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Scanline overlay for arcade effect */}
+            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px]" />
+        </div>
+    );
+}
 
 export default function Projects() {
     const ref = useRef(null);
@@ -42,24 +110,8 @@ export default function Projects() {
                             className="group"
                         >
                             <div className="relative bg-arcade-dark border-4 border-arcade-cyan hover:border-arcade-magenta transition-all duration-300 hover:shadow-neon-magenta overflow-hidden">
-                                {/* Project Image Placeholder */}
-                                <div className="relative h-48 bg-gradient-to-br from-arcade-purple to-arcade-dark flex items-center justify-center overflow-hidden">
-                                    {/* Placeholder for project screenshot */}
-                                    <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,255,255,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
-
-                                    {/* Project Title Overlay */}
-                                    <div className="relative z-10 text-center">
-                                        <div className="font-pixel text-xs text-arcade-cyan/50 mb-2">
-                                            [SCREENSHOT]
-                                        </div>
-                                        <div className="font-pixel text-xl text-white/20">
-                                            {project.id.toString().padStart(2, "0")}
-                                        </div>
-                                    </div>
-
-                                    {/* Hover Overlay */}
-                                    <div className="absolute inset-0 bg-arcade-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                </div>
+                                {/* Project Image Carousel */}
+                                <ProjectImageCarousel images={project.images} title={project.title} />
 
                                 {/* Project Info */}
                                 <div className="p-6">
@@ -126,23 +178,6 @@ export default function Projects() {
                         </motion.div>
                     ))}
                 </div>
-
-                {/* More Projects Link */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="text-center mt-12"
-                >
-                    <a
-                        href="https://github.com/thanhthuong03"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-pixel text-xs text-arcade-cyan hover:text-arcade-magenta transition-colors"
-                    >
-                        [ VIEW MORE ON GITHUB → ]
-                    </a>
-                </motion.div>
             </div>
         </section>
     );

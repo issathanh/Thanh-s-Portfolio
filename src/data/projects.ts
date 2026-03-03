@@ -6,7 +6,7 @@ export interface Project {
     technologies: string[];
     liveUrl?: string;
     githubUrl?: string;
-    imageUrl?: string;
+    images?: string[];
     featured: boolean;
 }
 
@@ -18,6 +18,12 @@ export const projects: Project[] = [
         longDescription: "Published iOS app featuring AI-powered story generation with TikTok-style feed, secure In-App Purchases with server-side validation, 60 FPS animations with React Native Reanimated, and CI/CD pipeline with Jest/Vitest testing.",
         technologies: ["React Native", "Expo", "TypeScript", "PostgreSQL", "Anthropic Claude API"],
         liveUrl: "https://web.myadventuresapp.com",
+        images: [
+            "/images/projects/Gemini_Generated_Image_262flq262flq262f (1).jpg",
+            "/images/projects/Gemini_Generated_Image_951ihk951ihk951i (1).jpg",
+            "/images/projects/Gemini_Generated_Image_ltim5wltim5wltim (1).jpg",
+            "/images/projects/Gemini_Generated_Image_vi1gedvi1gedvi1g (1).jpg",
+        ],
         featured: true,
     },
     {

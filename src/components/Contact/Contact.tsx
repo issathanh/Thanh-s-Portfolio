@@ -188,34 +188,6 @@ export default function Contact() {
                             </div>
                         </div>
 
-                        {/* Social Links */}
-                        <div className="bg-arcade-dark/50 border-2 border-arcade-green/30 p-6">
-                            <h3 className="font-pixel text-sm text-arcade-green mb-4">
-                                SOCIAL LINKS
-                            </h3>
-
-                            <div className="space-y-3">
-                                <a
-                                    href="https://github.com/thanhthuong03"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-3 font-mono text-white hover:text-arcade-cyan transition-colors"
-                                >
-                                    <span className="font-pixel text-xs">[GH]</span>
-                                    github.com/thanhthuong03
-                                </a>
-                                <a
-                                    href="https://linkedin.com/in/thanh-thuong"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-3 font-mono text-white hover:text-arcade-cyan transition-colors"
-                                >
-                                    <span className="font-pixel text-xs">[LI]</span>
-                                    linkedin.com/in/thanh-thuong
-                                </a>
-                            </div>
-                        </div>
-
                         {/* Fun CTA */}
                         <div className="text-center p-4 border border-arcade-yellow/30">
                             <p className="font-pixel text-[10px] text-arcade-yellow animate-pulse">
