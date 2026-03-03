@@ -18,13 +18,19 @@ function ProjectImageCarousel({ images, title }: { images?: string[]; title: str
     }, [images]);
 
     if (!images || images.length === 0) {
+        const isPortfolio = title.toLowerCase().includes("portfolio");
         return (
             <div className="relative h-64 bg-gradient-to-br from-arcade-purple to-arcade-dark flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,255,255,0.05)_50%,transparent_75%)] bg-[length:20px_20px]" />
                 <div className="relative z-10 text-center">
-                    <div className="font-pixel text-xs text-arcade-cyan/50 mb-2">
-                        [SCREENSHOT]
+                    <div className={`font-pixel text-xs ${isPortfolio ? 'text-arcade-magenta' : 'text-arcade-cyan/50'} mb-2`}>
+                        {isPortfolio ? "[ YOU'RE LOOKING AT IT ]" : "[SCREENSHOT]"}
                     </div>
+                    {isPortfolio && (
+                        <div className="font-pixel text-[8px] text-arcade-cyan/50 animate-pulse">
+                            ✨ META ✨
+                        </div>
+                    )}
                 </div>
             </div>
         );
